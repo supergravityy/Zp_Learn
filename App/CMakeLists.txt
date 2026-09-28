@@ -1,0 +1,36 @@
+cmake_minimum_required(VERSION 3.20)
+project(zp_learn_app LANGUAGES C)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+set(ZENOH_PICO_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../zenoh-pico" CACHE PATH "zenoh-pico source")
+
+# zenoh-pico 옵션: CACHE로 먼저 선언해야 zenoh-pico 기본값에 안 덮임 (-D로 변경 가능)
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "")
+set(BUILD_EXAMPLES    OFF CACHE BOOL "")
+set(BUILD_TESTING     OFF CACHE BOOL "")
+set(BUILD_TOOLS       OFF CACHE BOOL "")
+set(Z_FEATURE_UNSTABLE_API           1 CACHE STRING "")
+set(Z_FEATURE_CONNECTIVITY           1 CACHE STRING "")
+set(Z_FEATURE_ADVANCED_PUBLICATION   1 CACHE STRING "")
+set(Z_FEATURE_ADVANCED_SUBSCRIPTION  1 CACHE STRING "")
+set(Z_FEATURE_RX_CACHE               1 CACHE STRING "")
+set(Z_FEATURE_MULTICAST_DECLARATIONS 1 CACHE STRING "")
+set(Z_FEATURE_LOCAL_SUBSCRIBER       1 CACHE STRING "")
+set(Z_FEATURE_LOCAL_QUERYABLE        1 CACHE STRING "")
+set(Z_FEATURE_ADMIN_SPACE            1 CACHE STRING "")
+set(ZENOH_LOG                     INFO CACHE STRING "")
+
+# zenoh-pico를 함께 빌드 → zenohpico::lib 링크만으로 include/define 전파
+add_subdirectory(${ZENOH_PICO_DIR} ${CMAKE_BINARY_DIR}/zenoh-pico EXCLUDE_FROM_ALL)
+add_subdirectory(common)
+
+function(zpl_add_example name)
+  add_executable(${name} ${ARGN})
+  target_link_libraries(${name} PRIVATE zpl_common)
+endfunction()
+
+# 예제 폴더 (만들 때마다 추가)
+add_subdirectory(00_build_check)
+# add_subdirectory(01_session)

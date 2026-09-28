@@ -1,0 +1,18 @@
+{
+  "configurations": [
+    {
+      "name": "zp_learn (WSL)",
+      "compileCommands": "${workspaceFolder}/App/build/dev/compile_commands.json",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "intelliSenseMode": "linux-gcc-x64",
+      "includePath": [
+        "${workspaceFolder}/App/common",
+        "${workspaceFolder}/App/build/dev/zenoh-pico/include",
+        "${workspaceFolder}/zenoh-pico/include"
+      ],
+      "defines": ["ZENOH_LINUX", "ZENOH_COMPILER_GCC", "ZENOH_C_STANDARD=11", "ZENOH_LOG_INFO"]
+    }
+  ],
+  "version": 4
+}
