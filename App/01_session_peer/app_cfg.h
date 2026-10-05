@@ -36,11 +36,10 @@
 #error "ZP_SESSION_COMMU_MODE is not defined"
 #endif
 
-
-
 // 각 실행 파일의 노드 번호는 CMake에서 전달. -> ex) -DZP_SESSION_NODE_ID=0
 // 제노세션을 열 때, 각 노드별 key expression을 선택하여 사용.
 #ifndef ZP_SESSION_NODE_ID
+#define ZP_SESSION_NODE_ID          (0)                         // 인텔리센스 용으로 기본값을 넣어둠. 실제 빌드 시에는 CMake에서 -D로 덮어써야 함.
 #error "ZP_SESSION_NODE_ID must be supplied by CMake"
 #endif
 
@@ -68,6 +67,10 @@
     #define APP_ENDPOINT "udp/" ZP_SESSION_UDP_IP ":" ZP_SESSION_PEER_PORT "#iface=lo"
     #define APP_ENDPOINT_KEY Z_CONFIG_LISTEN_KEY
 
+#endif
+
+#ifndef APP_ENDPOINT_KEY
+#define APP_ENDPOINT_KEY "DEFAULT_ENDPOINT_KEY" // 인텔리센스 용으로 기본값을 넣어둠. 실제 빌드 시에는 CMake에서 -D로 덮어써야 함.
 #endif
 
 // 각 노드별 key expression 정의. (실습용으로 6개만 정의)
