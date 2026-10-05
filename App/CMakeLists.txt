@@ -23,14 +23,13 @@ set(Z_FEATURE_ADMIN_SPACE            1 CACHE STRING "")
 set(ZENOH_LOG                     INFO CACHE STRING "")
 
 # zenoh-pico를 함께 빌드 → zenohpico::lib 링크만으로 include/define 전파
-add_subdirectory(${ZENOH_PICO_DIR} ${CMAKE_BINARY_DIR}/zenoh-pico EXCLUDE_FROM_ALL)
-add_subdirectory(common)
+add_subdirectory("${ZENOH_PICO_DIR}" "${CMAKE_BINARY_DIR}/zenoh-pico" EXCLUDE_FROM_ALL)
 
 function(zpl_add_example name)
   add_executable(${name} ${ARGN})
-  target_link_libraries(${name} PRIVATE zpl_common)
+  target_link_libraries(${name} PRIVATE zenohpico::lib)
 endfunction()
 
 # 예제 폴더 (만들 때마다 추가)
 add_subdirectory(00_build_check)
-# add_subdirectory(01_session)
+add_subdirectory(01_session_peer)
