@@ -1,7 +1,7 @@
 # 같은 소스에 서로 다른 설정을 전달하여 실행 파일 4개 생성
 function(add_session_example name transport mode role node_id)
     zpl_add_example(${name} main.c app_cfg.h)
-    # build/dev/<예제 폴더>/<tcp 또는 udp>/<실행 파일>
+    # build/<예제 폴더>/<tcp 또는 udp>/<실행 파일>
     set_target_properties(${name} PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/${transport}"
     )

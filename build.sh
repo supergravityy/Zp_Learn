@@ -21,4 +21,4 @@ printf 'Configuring App (dev preset)...\n'
 cmake --preset dev
 printf 'Cleaning and rebuilding all App examples...\n'
 cmake --build --preset dev --clean-first
-printf 'Build complete: %s/App/build/dev\n' "$project_dir"
+printf 'Build complete: %s/build\n' "$project_dir"
